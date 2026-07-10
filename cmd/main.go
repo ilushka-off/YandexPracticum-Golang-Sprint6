@@ -1,26 +1,19 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
-	"github.com/Yandex-Practicum/go1fl-sprint6-final/internal/service"
+	"github.com/Yandex-Practicum/go1fl-sprint6-final/internal/server"
 )
 
 func main() {
-	filePath := "test"
-	filePath2 := "test12"
 
-	result, err := service.Run(filePath)
-	if err != nil {
-		log.Fatal(err)
+	logger := log.Default()
+
+	srv := server.NewServer(logger)
+
+	if err := srv.ListenAndServe(); err != nil {
+		logger.Fatal(err)
 	}
 
-	result2, err := service.Run(filePath2)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(result)
-	fmt.Println(result2)
 }
